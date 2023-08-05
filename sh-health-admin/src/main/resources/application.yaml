@@ -1,0 +1,41 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: sh-service-admin
+  mvc:
+    static-path-pattern: static/**
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lbn_project
+    username: lbn
+    password: lbn0713
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+      #password: lbn0713
+  servlet:
+    multipart:
+      max-file-size: 10MB   # 设置最大上传文件大小为10MB
+  web:
+    resources:
+      static-locations:
+        classpath: /static/**
+dubbo:
+  application:
+    name: sh-service-admin
+    check-serializable: false
+    serialize-check-status: WARN
+    qos-enable: true
+    qos-port: 33333
+    enable-file-cache: true
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    timeout: 250000000
+    parameters:
+      blockUntilConnectedWait: 250

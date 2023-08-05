@@ -1,0 +1,21 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: sh-service-quartz
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lbn_project
+    username: root
+    password: lbn0713
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+  quartz:
+    job-store-type: memory  #Job?????memory????????????jdbc
+    auto-startup: true  #??????
+    startup-delay: 0  #??N???
+    wait-for-jobs-to-complete-on-shutdown: true #?????????
+    overwrite-existing-jobs: false  #??????????
