@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lbn.mapper.CheckGroupMapper">
+    <insert id="insertCheckGroupAndCheckItem">
+        insert into t_checkgroup_checkitem(checkgroup_id,checkitem_id)
+        values (#{checkGroupId},#{checkItemId});
+    </insert>
+    <delete id="deleteCheckGroupAndCheckItem">
+        delete from t_checkgroup_checkitem where checkgroup_id = #{checkgroupid};
+    </delete>
+    <select id="listCheckItemIdsByCheckGroupId" resultType="java.lang.Integer">
+        select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{id};
+    </select>
+</mapper>

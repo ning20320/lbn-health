@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lbn.mapper.MemberMapper">
+    <insert id="add">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_member(fileNumber,name,sex,idCard,phoneNumber,regTime,password,email,birthday,remark)
+        values (#{fileNumber},#{name},#{sex},#{idCard},#{phoneNumber},#{regTime},#{password},#{email},#{birthday},#{remark})
+    </insert>
+    <update id="edit">
+        update t_member
+        <set>
+            <if test="fileNumber != null">
+                fileNumber = #{fileNumber},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="idCard != null">
+                idCard = #{idCard},
+            </if>
+            <if test="phoneNumber != null">
+                phoneNumber = #{phoneNumber},
+            </if>
+            <if test="regTime != null">
+                regTime = #{regTime},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from t_member where id = #{id}
+    </delete>
+    <select id="findAll" resultType="lbn.entity.Member">
+        select * from t_member
+    </select>
+    <select id="selectByCondition" resultType="lbn.entity.Member">
+        select * from t_member
+        <if test="value != null and value.length > 0">
+            where fileNumber = #{value} or phoneNumber = #{value} or name = #{value}
+        </if>
+    </select>
+    <select id="findById" resultType="lbn.entity.Member">
+        select * from t_member where id = #{id}
+    </select>
+    <select id="findByTelephone" resultType="lbn.entity.Member">
+        select * from t_member where phoneNumber = #{phoneNumber}
+    </select>
+    <select id="findMemberCountBeforeDate" resultType="java.lang.Integer">
+        select count(id) from t_member where regTime &lt;= #{value}
+    </select>
+    <select id="findMemberCountByDate" resultType="java.lang.Integer">
+        select count(id) from t_member where regTime = #{value}
+    </select>
+    <select id="findMemberCountAfterDate" resultType="java.lang.Integer">
+        select count(id) from t_member where regTime &gt;= #{value}
+    </select>
+    <select id="findMemberTotalCount" resultType="java.lang.Integer">
+        select count(id) from t_member
+    </select>
+</mapper>
